@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "del /s /q dist && babel server.js --out-dir dist",
+    "build": "babel index.js utils.js --out-dir dist",
     "dev": "babel-watch server.js",
     "prelint:js": "npm run format:all",
     "lint:js": "eslint ./*.js",
@@ -19,9 +19,6 @@
   ],
   "author": "Burhan Bharmal",
   "license": "ISC",
-  "dependencies": {
-    "express": "^4.16.4"
-  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
