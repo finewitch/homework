@@ -12,41 +12,43 @@ test('isScoreWithinThreshold', () => {
   ).toBe(false)
 })
 
-test('extractDescriptions', () => {
-  expect(
-    extractDescriptions('1.jpg', exampleDbLabelsResource())
-  ).toEqual({ 'Natural foods': 0.9950245022773743 })
+describe('extractDescriptions', () => {
+
+  test('extractDescriptions', () => {
+    expect(
+      extractDescriptions('1.jpg', exampleDbLabelsResource())
+    ).toEqual({ 'Natural foods': 0.9950245022773743 })
+  })
+  
+  test('return undefined if there is no label in db', () => {
+    expect(
+      extractDescriptions('10.jpg', exampleDbLabelsResource())
+    ).toBe(undefined)
+  })
+
 })
 
-test('extractDescriptions', () => {
-  expect(
-    extractDescriptions('10.jpg', exampleDbLabelsResource())
-  ).toBe(undefined)
-})
+describe('findMatchingDescriptions', () => {
 
+const exampleLabel = exampleDbLabelsResource()
+const enchancedResourcesExample = {
+  ...exampleDbLabelsResource(),
+  '2.jpg': exampleLabel['1.jpg']
+}
 test('findMatchingDescriptions', () => {
-  const exampleLabel = exampleDbLabelsResource()
-
-  const enchancedResourcesExample = {
-    ...exampleDbLabelsResource(),
-    '2.jpg': exampleLabel['1.jpg']
-  }
 
   expect(
     findMatchingDescriptions('1.jpg', { 'Natural foods': 0.9950245022773743 }, enchancedResourcesExample)
   ).toEqual({ '2.jpg': [{ 'Natural foods': 0.9950245022773743 }] })
 })
 
-test('findMatchingDescriptions', () => {
-  const exampleLabel = exampleDbLabelsResource()
+test('return empty array when no matched descriptions found', () => {
 
-  const enchancedResourcesExample = {
-    ...exampleDbLabelsResource(),
-    '2.jpg': exampleLabel['1.jpg']
-  }
   enchancedResourcesExample['2.jpg'][0].description = 'test'
 
   expect(
     findMatchingDescriptions('1.jpg', { 'Natural foods': 0.9950245022773743 }, enchancedResourcesExample)
   ).toEqual({ '2.jpg': [] })
+})
+
 })
