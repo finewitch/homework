@@ -62,3 +62,8 @@ typings/
 
 # build server code
 dist
+
+#babel
+.babelrc
+#vscode
+.vscode
