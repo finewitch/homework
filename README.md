@@ -1,3 +1,16 @@
+## Homework
+
+```sh
+# Install dependencies
+npm install
+
+# Build files:
+npm run build
+
+# Run them from dist ex:
+node dist/index.js
+
+```
 # NodeJS, Express & ES6 API Boilerplate
 
 This is a straightforward boilerplate for building REST APIs with ES6 and Express.
